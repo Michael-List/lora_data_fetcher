@@ -3,6 +3,7 @@ import time
 import logging
 import re
 import shutil
+import codecs
 
 from watchdog.observers import Observer
 from watchdog.events import LoggingEventHandler
@@ -10,7 +11,7 @@ from watchdog.events import FileSystemEventHandler
 
 from api_client import ApiClient
 
-REGEX_FILE_CONTENT = '^[d][0-9]{2};[-]?([0-9]*[.])?[0-9]+;[-]?([0-9]*[.])?[0-9]+;[-]?([0-9]*[.])?[0-9]+;[-]?([0-9]*[.])?[0-9]+;;$'
+REGEX_FILE_CONTENT = '^[d][0-9]{2};[-]?([0-9]*[.])?[0-9]+;[-]?([0-9]*[.])?[0-9]+;[-]?([0-9]*[.])?[0-9]+;[-]?([0-9]*[.])?[0-9]+;;'
 REGEX_FILE_NAME = '^[0-9]{4}-[0-9]{2}-[0-9]{2}_[0-9]{2}:[0-9]{2}:[0-9]{2}.rec$'
 REGEX_FALSE_FILE = '^.\/received\/.+$'
 API_CLIENT = None
@@ -19,11 +20,11 @@ API_CLIENT = None
 class MyHandler(FileSystemEventHandler):
     def on_created(self, event):
         successful = False
-        print(f'event type: {event.event_type}  path: {event.src_path}')
+        logging.info('event type: {}, path: {}'.format(event.event_type, event.src_path))
         time.sleep(1)
 
         if re.match(REGEX_FILE_NAME, event.src_path.split('/')[-1]):
-            with open(event.src_path) as f:
+            with codecs.open(event.src_path, "r",encoding='utf-8', errors='ignore') as f:
                 content = f.readline()
                 if re.match(REGEX_FILE_CONTENT, content):
                     split_content = content.split(';')
