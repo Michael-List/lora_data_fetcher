@@ -36,6 +36,7 @@ class MyHandler(FileSystemEventHandler):
                     timestamp = event.src_path.split('/')[-1]
                     timestamp = timestamp.replace('.rec', '')
                     timestamp = timestamp.replace('_', 'T')
+                    timestamp = timestamp + '+0200'
                     successful = API_CLIENT.send_data(temperature, humidity, pressure, timestamp)
 
         if successful:

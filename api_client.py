@@ -4,9 +4,9 @@ import logging
 
 import requests
 
-SERVER_URL = 'http://localhost:8080'
-SERVER_USER = 'test'
-SERVER_PASSWORD = 'test'
+SERVER_URL = 'http://localhost'
+SERVER_USER = 'user'
+SERVER_PASSWORD = 'user'
 
 
 class ApiClient():
@@ -63,7 +63,7 @@ class ApiClient():
                 "timestamp": timestamp
             }
             r = self.session.post(url=self.api_url + '/api/temperature', json=payload)
-            if r.status_code != 200:
+            if r.status_code not in range(200, 300):
                 logging.warning('Could not post temperature, status code was: {}'.format(r.status_code))
                 successful = False
 
@@ -73,7 +73,7 @@ class ApiClient():
                 "timestamp": timestamp
             }
             self.session.post(url=self.api_url + '/api/humidity', json=payload)
-            if r.status_code != 200:
+            if r.status_code not in range(200, 300):
                 logging.warning('Could not post humidity, status code was: {}'.format(r.status_code))
                 successful = False
 
@@ -83,7 +83,7 @@ class ApiClient():
                 "timestamp": timestamp
             }
             self.session.post(url=self.api_url + '/api/pressure', json=payload)
-            if r.status_code != 200:
+            if r.status_code not in range(200, 300):
                 logging.warning('Could not post pressure, status code was: {}'.format(r.status_code))
                 successful = False
 
