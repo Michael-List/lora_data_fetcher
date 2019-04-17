@@ -1,0 +1,41 @@
+version: '3'
+
+services:
+  influxdb:
+    container_name: influxdb
+    image: influxdb:1.7.5-alpine
+    ports:
+      - '8086:8086'
+    volumes:
+      - $VOLUME_DIR/influxdb:/var/lib/influxdb
+    environment:
+      - INFLUXDB_DB
+      - INFLUXDB_ADMIN_USER
+      - INFLUXDB_ADMIN_PASSWORD
+
+  chronograf:
+    container_name: chronograf
+    image: chronograf:1.7.8-alpine
+    ports:
+      - '127.0.0.1:8888:8888'
+    volumes:
+      - $VOLUME_DIR/chronograf:/var/lib/chronograf
+    depends_on:
+      - influxdb
+    environment:
+      - INFLUXDB_URL=http://influxdb:8086
+      - INFLUXDB_USERNAME=${INFLUXDB_USERNAME}
+      - INFLUXDB_PASSWORD=${INFLUXDB_PASSWORD}
+
+  grafana:
+    container_name: grafana
+    image: grafana/grafana:6.1.4
+    ports:
+      - '3000:3000'
+    volumes:
+      - $VOLUME_DIR/grafana:/var/lib/grafana
+    depends_on:
+      - influxdb
+    environment:
+      - GF_SECURITY_ADMIN_USER
+      - GF_SECURITY_ADMIN_PASSWORD
