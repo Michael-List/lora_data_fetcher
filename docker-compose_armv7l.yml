@@ -17,7 +17,7 @@ services:
 
   chronograf:
     container_name: chronograf
-    image: chronograf:1.7.8-alpine
+    image: arm32v7/chronograf:1.7.8
     ports:
       - '127.0.0.1:8888:8888'
     volumes:
