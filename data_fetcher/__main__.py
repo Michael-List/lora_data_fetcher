@@ -19,8 +19,8 @@ if __name__ == '__main__':
             # Read is blocking
             chunk = f.read(52)
             if chunk:
-                logger.debug('Received message from lora: ' + str(chunk))
-                ws_data = WeatherstationData.validate_string(chunk)
+                logger.debug('Received message from lora: ' + chunk.decode("utf-8"))
+                ws_data = WeatherstationData.validate_string(chunk.decode("utf-8"))
                 #             if ws_data is not None:
                 #                 print(ws_data.timestamp)
                 #                 print(ws_data.station)
