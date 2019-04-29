@@ -1,3 +1,6 @@
+# Lora data fetcher
+Processes incoming lora data. More Features and cleanup coming soon!  
+Uses the pipe from this project: https://github.com/mruijter/lora_transceiver
 
 # Setup
 * Clone this repo
