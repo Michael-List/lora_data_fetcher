@@ -4,7 +4,7 @@ import logging
 
 import requests
 
-SERVER_URL = 'http://localhost:8086/write'
+SERVER_URL = 'http://influxdb:8086/write'
 SERVER_USER = 'user'
 SERVER_PASSWORD = 'user'
 
