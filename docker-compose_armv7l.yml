@@ -11,6 +11,8 @@ services:
     restart: always
 #    environment:
 #      - sss
+    devices:
+      - "/dev/shm/receive_fifo:/dev/shm/receive_fifo"
 
   influxdb:
     container_name: influxdb
