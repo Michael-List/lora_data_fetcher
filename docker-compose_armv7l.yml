@@ -6,13 +6,9 @@ services:
     build:
       context: ./
       dockerfile: Dockerfile_armv7l
-#    volumes:
-#      - $VOLUME_DIR/irk:/usr/src/app/conf
-    restart: always
-#    environment:
-#      - sss
-    devices:
+    volumes:
       - "/dev/shm/receive_fifo:/dev/shm/receive_fifo"
+    restart: always
 
   influxdb:
     container_name: influxdb
