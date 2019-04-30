@@ -1,10 +1,11 @@
 import logging
+import time
 
 from data_fetcher.api_client import ApiClient
 from data_fetcher.weatherstation_data import WeatherstationData
 
 if __name__ == '__main__':
-    logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
+    logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.DEBUG)
     logger = logging.getLogger(__name__)
 
     with open('/dev/shm/receive_fifo', "rb") as f:
@@ -19,3 +20,5 @@ if __name__ == '__main__':
 
                 if ws_data is not None:
                     api_client.send_data(db='weatherstation', ws_data=ws_data)
+
+            time.sleep(0.2)
