@@ -152,8 +152,3 @@ venv.bak/
 
 # mypy
 .mypy_cache/
-
-# my stuff
-failed/*
-received/*
-send/*
