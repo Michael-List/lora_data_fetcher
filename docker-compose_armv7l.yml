@@ -23,6 +23,7 @@ services:
       - INFLUXDB_USER_PASSWORD
       - INFLUXDB_ADMIN_USER
       - INFLUXDB_ADMIN_PASSWORD
+    restart: always
 
   chronograf:
     container_name: chronograf
@@ -37,6 +38,7 @@ services:
       - INFLUXDB_URL=http://influxdb:8086
       - INFLUXDB_USERNAME=${INFLUXDB_ADMIN_USER}
       - INFLUXDB_PASSWORD=${INFLUXDB_ADMIN_PASSWORD}
+    restart: always
 
   grafana:
     container_name: grafana
@@ -50,3 +52,4 @@ services:
     environment:
       - GF_SECURITY_ADMIN_USER
       - GF_SECURITY_ADMIN_PASSWORD
+    restart: always
