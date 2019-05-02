@@ -9,7 +9,7 @@ if [[ ! -p ${pipe} ]]; then
 fi
 
 while true; do
-    printf "1) Send valid data\n2) Send false data\n3) Quit\n"
+    printf "1) Send valid data\n2) Send valid data too\n3) Send false data\n4) Quit\n"
     read NUMBER
 
     case ${NUMBER} in
@@ -19,15 +19,20 @@ while true; do
             printf "Blocks until data was read\n"
             ;;
          2)
+            echo "01;-5.3;1010.22;70.44;340;200;3.00;20;" > ${pipe}
+            printf "Wrote valid data to $pipe\n"
+            printf "Blocks until data was read\n"
+            ;;
+         3)
             echo "aaa;21.16;954.a;4d.88;260;256;0.00;7;" > ${pipe}
             printf "Wrote false data to $pipe\n"
             printf "Blocks until data was read\n"
             ;;
-         3)
+         4)
             printf "Exiting, goodbye!\n"
             exit;
             ;;
     esac
 
-    printf "-----------------------------------------"
+    printf "\n"
 done
