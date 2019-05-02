@@ -12,7 +12,6 @@ if __name__ == '__main__':
         api_client = ApiClient()
 
         while True:
-            # Read is blocking
             chunk = f.read(52)
             if chunk:
                 logger.debug('Received message from lora: ' + chunk.decode("utf-8"))
