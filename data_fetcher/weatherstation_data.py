@@ -32,3 +32,19 @@ class WeatherstationData:
                                       float(split_content[7]))
         else:
             return None
+
+    def __eq__(self, other):
+        if self.station == other.station and \
+                self.temperature == other.temperature and \
+                self.humidity == other.humidity and \
+                self.pressure == other.pressure and \
+                self.vis_light == other.vis_light and \
+                self.ir_light == other.ir_light and \
+                self.uv_light == other.uv_light and \
+                self.gr_moisture == other.gr_moisture:
+            return True
+        else:
+            return False
+
+    def __ne__(self, other):
+        return not self.__eq__(other)
