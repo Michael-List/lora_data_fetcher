@@ -2,7 +2,7 @@
 Processes incoming lora data. More Features and cleanup coming soon!  
 Uses the pipe from this project: https://github.com/mruijter/lora_transceiver
 
-# Setup without pipe lora pipe
+# Setup without lora pipe
 If you would like to try this setup but don't want to use the software from https://github.com/mruijter/lora_transceiver, you can use it for testing with our own pipe.
 * Execute ./test_pipe.sh
 * Make below setup
