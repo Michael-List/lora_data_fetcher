@@ -62,4 +62,3 @@ services:
     restart: always
     volumes:
       - $VOLUME_DIR/grafana_nginx:/etc/nginx/
-      - /etc/letsencrypt/live/$NGINX_CERT_DOMAIN:/etc/letsencrypt/live/$NGINX_CERT_DOMAIN/
