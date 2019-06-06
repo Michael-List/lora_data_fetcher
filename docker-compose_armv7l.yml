@@ -12,7 +12,7 @@ services:
 
   influxdb:
     container_name: influxdb
-    image: influxdb:1.7.5
+    image: influxdb:1.7.6
     ports:
       - '8086:8086'
     volumes:
@@ -27,7 +27,7 @@ services:
 
   chronograf:
     container_name: chronograf
-    image: arm32v7/chronograf:1.7.8
+    image: arm32v7/chronograf:1.7.11
     ports:
       - '127.0.0.1:8888:8888'
     volumes:
@@ -42,7 +42,7 @@ services:
 
   grafana:
     container_name: grafana
-    image: grafana/grafana:6.1.4
+    image: grafana/grafana:6.2.2
     ports:
       - '3000:3000'
     volumes:
