@@ -43,8 +43,6 @@ services:
   grafana:
     container_name: grafana
     image: grafana/grafana:6.2.2
-    ports:
-      - '3000:3000'
     volumes:
       - $VOLUME_DIR/grafana:/var/lib/grafana
     depends_on:
@@ -53,3 +51,14 @@ services:
       - GF_SECURITY_ADMIN_USER
       - GF_SECURITY_ADMIN_PASSWORD
     restart: always
+
+  grafana_nginx:
+    container_name: grafana_nginx
+    image: nginx:1.17.0
+    depends_on:
+      - grafana
+    ports:
+      - '3000:3000'
+    restart: always
+    volumes:
+      - $VOLUME_DIR/grafana_nginx:/etc/nginx/
