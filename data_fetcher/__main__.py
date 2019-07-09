@@ -11,12 +11,16 @@ if __name__ == '__main__':
     with open('/dev/shm/receive_fifo', "rb") as f:
         api_client = ApiClient()
         last_ws_data = None
+        ws_data = None
 
         while True:
             chunk = f.read(52)
             if chunk:
-                logger.debug('Received message from lora: ' + chunk.decode("utf-8"))
-                ws_data = WeatherstationData.validate_string(chunk.decode("utf-8"))
+                try:
+                    logger.debug('Received message from lora: ' + chunk.decode("utf-8"))
+                    ws_data = WeatherstationData.validate_string(chunk.decode("utf-8"))
+                except UnicodeDecodeError:
+                    logger.warning('Could not decode received message')
 
                 if ws_data is not None and (last_ws_data is None or ws_data.__ne__(last_ws_data)):
                     logger.debug("weather data doesn't equal last weather data")
