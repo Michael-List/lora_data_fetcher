@@ -11,8 +11,8 @@ if __name__ == '__main__':
     logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.DEBUG)
     logger = logging.getLogger(__name__)
 
-    while not os.path.isfile(FIFO_PATH):
-        logger.debug('Pipe file ' + FIFO_PATH + 'doesn\'t exist. Waiting till created')
+    while not os.path.exists(FIFO_PATH):
+        logger.debug('Pipe file ' + FIFO_PATH + ' doesn\'t exist. Waiting till created')
         time.sleep(5)
 
     with open(FIFO_PATH, "rb") as f:
