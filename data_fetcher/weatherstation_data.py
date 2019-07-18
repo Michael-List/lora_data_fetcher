@@ -1,7 +1,7 @@
 import re
 from datetime import datetime
 
-REGEX_FILE_CONTENT = '[0-9]{2};[-]?([0-9]*[.])?[0-9]+;([0-9]*[.])?[0-9]+;([0-9]*[.])?[0-9]+;([0-9]*[.])?[0-9]+;([0-9]*[.])?[0-9]+;([0-9]*[.])?[0-9]+;[0-9]*;'
+REGEX_FILE_CONTENT = '[0-9]{2};[-]?([0-9]*[.])?[0-9]+;([0-9]*[.])?[0-9]+;([0-9]*[.])?[0-9]+;([0-9]*[.])?[0-9]+;([0-9]*[.])?[0-9]+;([0-9]*[.])?[0-9]+;[0-9]*;;'
 
 
 class WeatherstationData:
@@ -22,7 +22,7 @@ class WeatherstationData:
         return re.search(REGEX_FILE_CONTENT, data)
 
     @staticmethod
-    def validate_string(data):
+    def convert_string(data):
         if re.match(REGEX_FILE_CONTENT, data):
             split_content = data.split(';')
             return WeatherstationData(datetime.now(),

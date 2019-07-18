@@ -33,7 +33,7 @@ if __name__ == '__main__':
                 if ws_match:
                     logger.debug('Found ws: ' + ws_match.group(0))
                     inc_data = inc_data[ws_match.span(0)[1]:]
-                    ws_data = WeatherstationData.validate_string(ws_match.group(0))
+                    ws_data = WeatherstationData.convert_string(ws_match.group(0))
 
                     if ws_data is not None and (last_ws_data is None or ws_data.__ne__(last_ws_data)):
                         logger.debug("weather data doesn't equal last weather data")
