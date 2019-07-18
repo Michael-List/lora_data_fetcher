@@ -22,12 +22,11 @@ if __name__ == '__main__':
         inc_data = ''
 
         while True:
-            inc_string = f.read().decode("utf-8", 'ignore')
+            inc_string = f.read(1).decode("utf-8", 'ignore')
             if inc_string:
                 logger.debug('New data: ' + inc_string)
                 inc_data += inc_string
 
-            for _ in range(5):
                 logger.debug('String before manipulating: ' + inc_data)
 
                 ws_match = WeatherstationData.search_string(inc_data)
@@ -43,4 +42,4 @@ if __name__ == '__main__':
 
                 logger.debug('String after manipulating: ' + inc_data)
 
-            time.sleep(1)
+            time.sleep(0.2)
