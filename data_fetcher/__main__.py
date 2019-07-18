@@ -19,7 +19,7 @@ if __name__ == '__main__':
         api_client = ApiClient()
         last_ws_data = None
         ws_data = None
-        inc_data = None
+        inc_data = ''
 
         while True:
             inc_data += f.read().decode("utf-8", 'ignore')
