@@ -19,19 +19,27 @@ if __name__ == '__main__':
         api_client = ApiClient()
         last_ws_data = None
         ws_data = None
+        inc_data = ''
 
         while True:
-            chunk = f.read(52)
-            if chunk:
-                try:
-                    logger.debug('Received message from lora: ' + chunk.decode("utf-8"))
-                    ws_data = WeatherstationData.validate_string(chunk.decode("utf-8"))
-                except UnicodeDecodeError:
-                    logger.warning('Could not decode received message')
+            inc_string = f.read(1).decode("utf-8", 'ignore')
+            if inc_string:
+                logger.debug('New data: ' + inc_string)
+                inc_data += inc_string
 
-                if ws_data is not None and (last_ws_data is None or ws_data.__ne__(last_ws_data)):
-                    logger.debug("weather data doesn't equal last weather data")
-                    api_client.send_data(db='weatherstation', ws_data=ws_data)
-                    last_ws_data = ws_data
+                logger.debug('String before manipulating: ' + inc_data)
+
+                ws_match = WeatherstationData.search_string(inc_data)
+                if ws_match:
+                    logger.debug('Found ws: ' + ws_match.group(0))
+                    inc_data = inc_data[ws_match.span(0)[1]:]
+                    ws_data = WeatherstationData.validate_string(ws_match.group(0))
+
+                    if ws_data is not None and (last_ws_data is None or ws_data.__ne__(last_ws_data)):
+                        logger.debug("weather data doesn't equal last weather data")
+                        api_client.send_data(db='weatherstation', ws_data=ws_data)
+                        last_ws_data = ws_data
+
+                logger.debug('String after manipulating: ' + inc_data)
 
             time.sleep(0.2)
