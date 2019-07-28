@@ -6,7 +6,7 @@ REGEX_FILE_CONTENT = '[0-9]{2};[-]?([0-9]*[.])?[0-9]+;([0-9]*[.])?[0-9]+;([0-9]*
 
 class WeatherstationData:
     def __init__(self, timestamp, station, temperature=None, humidity=None, pressure=None, vis_light=None,
-                 ir_light=None, uv_light=None, gr_moisture=None):
+                 ir_light=None, uv_light=None):
         self.timestamp = timestamp
         self.station = station
         self.temperature = temperature
@@ -15,7 +15,6 @@ class WeatherstationData:
         self.vis_light = vis_light
         self.ir_light = ir_light
         self.uv_light = uv_light
-        self.gr_moisture = gr_moisture
 
     @staticmethod
     def search_string(data):
@@ -32,8 +31,7 @@ class WeatherstationData:
                                       float(split_content[2]),
                                       float(split_content[4]),
                                       float(split_content[5]),
-                                      float(split_content[6]),
-                                      float(split_content[7]))
+                                      float(split_content[6]))
         else:
             return None
 
@@ -44,8 +42,7 @@ class WeatherstationData:
                 self.pressure == other.pressure and \
                 self.vis_light == other.vis_light and \
                 self.ir_light == other.ir_light and \
-                self.uv_light == other.uv_light and \
-                self.gr_moisture == other.gr_moisture:
+                self.uv_light == other.uv_light:
             return True
         else:
             return False
