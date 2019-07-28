@@ -73,15 +73,6 @@ class ApiClient:
                 self.logger.warning('Could not post uv_light, status code was: {}'.format(r.status_code))
                 successful = False
 
-        if ws_data.gr_moisture:
-            r = requests.post(url=self.api_url,
-                              params={'db': db},
-                              data='gr_moisture,station=' + str(ws_data.station) +
-                                   ' value=' + str(ws_data.gr_moisture) + ' ' + str(timestamp))
-            if r.status_code not in range(200, 300):
-                self.logger.warning('Could not post gr_moisture, status code was: {}'.format(r.status_code))
-                successful = False
-
         return successful
 
     def send_wm_data(self, db, wm_data):
