@@ -12,7 +12,7 @@ services:
 
   influxdb:
     container_name: influxdb
-    image: influxdb:1.7.6
+    image: influxdb:1.8.0
     ports:
       - '8086:8086'
     volumes:
@@ -27,7 +27,7 @@ services:
 
   chronograf:
     container_name: chronograf
-    image: arm32v7/chronograf:1.7.11
+    image: arm32v7/chronograf:1.8.4
     ports:
       - '127.0.0.1:8888:8888'
     volumes:
@@ -38,11 +38,11 @@ services:
       - INFLUXDB_URL=http://influxdb:8086
       - INFLUXDB_USERNAME=${INFLUXDB_ADMIN_USER}
       - INFLUXDB_PASSWORD=${INFLUXDB_ADMIN_PASSWORD}
-    restart: always
+    restart: unless-stopped
 
   grafana:
     container_name: grafana
-    image: grafana/grafana:6.2.2
+    image: grafana/grafana:7.0.3
     volumes:
       - $VOLUME_DIR/grafana:/var/lib/grafana
     depends_on:
@@ -54,7 +54,7 @@ services:
 
   grafana_nginx:
     container_name: grafana_nginx
-    image: nginx:1.17.0
+    image: nginx:1.19.0
     depends_on:
       - grafana
     ports:

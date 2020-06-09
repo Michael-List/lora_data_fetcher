@@ -1,4 +1,4 @@
-FROM alpine:3.8
+FROM alpine:3.9.6
 
 WORKDIR /usr/src/app
 COPY ./requirements.txt /usr/src/app/requirements.txt
